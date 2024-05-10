@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600&display=swap");
+
+// Colors
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$success-color: #28a745;
+$info-color: #17a2b8;
+$warning-color: #ffc107;
+$danger-color: #dc3545;
+$light-color: #f8f9fa;
+$dark-color: #343a40;
+
+// Typography
+$body-font-family: "Roboto", sans-serif;
+$heading-font-family: "Montserrat", sans-serif;
+$base-font-size: 16px;
+$heading-font-size: 24px;
+$line-height: 1.5;
+
+// Spacing
+$spacing-unit: 1rem;
+$small-spacing: 0.5rem;
+$medium-spacing: 1rem;
+$large-spacing: 2rem;
+
+// Border radius
+$border-radius: 4px;
+
+// Box shadows
+$box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+// Z-index
+$z-index-dropdown: 1000;
+$z-index-modal: 2000;
+$z-index-navbar: 100;
+
+// Breakpoints
+$breakpoint-xs: 576px;
+$breakpoint-sm: 768px;
+$breakpoint-md: 992px;
+$breakpoint-lg: 1200px;
