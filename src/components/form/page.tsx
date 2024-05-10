@@ -41,7 +41,7 @@ const FormComponent = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
-      // e.preventDefault();
+      e.preventDefault();
 
       console.log(`From form submit: ${JSON.stringify(formData)}`);
       addItem(formData);

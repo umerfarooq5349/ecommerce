@@ -4,7 +4,7 @@
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 16px;
+  padding: 6px;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
@@ -14,8 +14,8 @@
   }
 
   .itemImage {
-    width: 100%;
-    max-height: 200px;
+    width: 200px;
+    height: 200px;
     position: relative;
     object-position: center;
     object-fit: cover;
@@ -24,34 +24,70 @@
 
   .itemInfo {
     margin-top: 12px;
-    text-align: center;
-  }
-
-  .itemName {
-    font-size: 18px;
-    font-weight: bold;
+    width: 100%;
     color: #333;
-    margin-bottom: 8px;
-  }
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 
+    .itemName {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    .itemBrand {
+      opacity: 0.8;
+    }
+  }
   .itemPrice {
     font-size: 16px;
     color: #666;
     margin-bottom: 12px;
   }
+  .inStock {
+    color: green;
+    padding: 8px;
 
-  .addToCartBtn {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 16px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    margin: 4px 0;
+  }
+  .outOfStock {
+    color: red;
+    padding: 8px;
+    margin: 4px 0;
+  }
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 12px;
+    width: 100%;
 
-    &:hover {
-      background-color: #0056b3;
+    .seeMore {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+    .delete {
+      background-color: #ff0033;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      &:hover {
+        background-color: #b30000;
+      }
     }
   }
 }
