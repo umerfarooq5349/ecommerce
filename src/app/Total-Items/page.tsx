@@ -47,7 +47,7 @@ const TotalProducts = () => {
       showCancelButton: true,
       confirmButtonColor: "#d33",
       cancelButtonColor: "#3085d6",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, deleete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
         await deleteItem(itemId);
