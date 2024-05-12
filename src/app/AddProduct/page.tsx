@@ -1,4 +1,4 @@
-import FormComponent from "@/components/form/page";
+import FormComponent from "@/components/addProductFrorm/page";
 
 const AddProduct = () => {
   return (

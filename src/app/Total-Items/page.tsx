@@ -1,16 +1,26 @@
 "use client";
 
-import ItemCard from "@/components/card/itemCard";
+import React, { useEffect, useState } from "react";
 import { deleteItem, getAllItems } from "../api/item";
-import { useEffect, useState } from "react";
+import ItemCard from "@/components/card/itemCard";
 import styles from "@/utils/saas/total-Items.module.scss";
-import Link from "next/link";
+import Sidebar from "@/components/sideBar/sidbar"; // Import the Sidebar component
+import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import AddProduct from "../AddProduct/page";
+import UpdateProductForm from "@/components/updateProductForm/updateProductForm";
+import { Productts } from "@/utils/model/item";
+
 const TotalProducts = () => {
   const router = useRouter();
-  const [allItems, setAllItems] = useState([]);
+  const [allItems, setAllItems] = useState<Productts[]>([]);
+  const [updateItem, setUpdateItem] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState<number | undefined>(
+    undefined
+  );
+
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchItems = async () => {
       try {
         const itemsData = await getAllItems();
         setAllItems(itemsData.data);
@@ -18,23 +28,69 @@ const TotalProducts = () => {
         console.error("Error fetching data:", error);
       }
     };
-    fetchData();
+    fetchItems();
   }, []);
-  const updateBtn = (Item: number) => {
-    console.log(`Update Btn ${Item}`);
-    router.push(`/${Item}`);
+
+  const updateBtn = async (itemId: number) => {
+    console.log(`Update Btn ${itemId}`);
+    setUpdateItem(true);
+    setSelectedItemId(itemId);
   };
-  const deleteBtn = (id: number) => {
-    console.log(`Delete Btn ${id}`);
-    deleteItem(id);
+
+  const handleDelete = async (itemId: number) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You are going to delete this item",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await deleteItem(itemId);
+        Swal.fire({
+          title: "Deleted!",
+          text: "Item has been deleted.",
+          icon: "success",
+        });
+        setAllItems(allItems.filter((item) => item._id !== itemId));
+        if (selectedItemId === itemId) {
+          setSelectedItemId(undefined); // Clear the selected item ID if it matches the deleted item ID
+        }
+      }
+    });
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        updateItem &&
+        event.target instanceof Element && // Check if target is an Element
+        !event.target.closest("#sidebar")
+      ) {
+        setUpdateItem(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [updateItem]);
 
   return (
     <div className={styles.container}>
       <h1>All Products</h1>
       <div className={styles.body}>
-        <Link href={"/1"}>students</Link>
-        {allItems.map((item: any) => (
+        {updateItem && (
+          <div className={styles.sidebar} id="sidebar">
+            This is my sidebar for the product list
+            <UpdateProductForm id={selectedItemId || 0} />
+          </div>
+        )}
+        {allItems.map((item: Productts) => (
           <ItemCard
             imageUrl={item.thumbnail}
             name={item.title}
@@ -42,12 +98,13 @@ const TotalProducts = () => {
             brand={item.brand}
             key={item._id}
             stock={item.stock}
-            updateBtn={() => updateBtn(item._id)}
-            deleteBtn={() => deleteBtn(item._id)}
-          ></ItemCard>
+            updateBtn={() => updateBtn(item._id || 0)}
+            deleteBtn={() => handleDelete(item._id || 0)}
+          />
         ))}
       </div>
     </div>
   );
 };
+
 export default TotalProducts;

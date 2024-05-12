@@ -16,7 +16,45 @@
   .body {
     display: flex;
     flex-wrap: wrap;
+    width: 1000px;
+    justify-content: center;
     gap: 20px;
-    width: 100%;
   }
+}
+
+/* Sidebar.module.scss */
+
+.sidebar {
+  background-color: #333;
+  color: #fff;
+  width: 500px;
+  padding: 20px;
+  height: 100vh;
+  //position: relative;
+  z-index: 1;
+  position: fixed;
+  // backdrop-filter: blur(8px);
+  // transition: 0.1s filter;
+  // filter: blur(3px);
+  top: 0;
+  right: 0;
+  h2: {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+    li {
+      font-size: 18px;
+      margin-bottom: 10px;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+.sidebarclose {
+  display: hidden;
 }
