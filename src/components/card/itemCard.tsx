@@ -40,7 +40,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
       </div>
       <p className={styles.itemPrice}>${price.toFixed(2)}</p>
       <div className={stock <= 0 ? styles.outOfStock : styles.inStock}>
-        In Stock {stock}
+        Inn Stoock {stock}
       </div>
       <div className={styles.buttons}>
         <button className={styles.seeMore} onClick={handleUpdateClick}>
