@@ -5,6 +5,7 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 6px;
+  width: 300px;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
@@ -14,7 +15,7 @@
   }
 
   .itemImage {
-    width: 200px;
+    width: 280px;
     height: 200px;
     position: relative;
     object-position: center;

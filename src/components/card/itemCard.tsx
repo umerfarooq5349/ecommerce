@@ -8,6 +8,7 @@ interface ItemCardProps {
   stock: number;
   updateBtn(): void;
   deleteBtn(): void;
+  onclickBtn(): void;
 }
 
 const ItemCard: React.FC<ItemCardProps> = ({
@@ -18,9 +19,20 @@ const ItemCard: React.FC<ItemCardProps> = ({
   stock,
   updateBtn,
   deleteBtn,
+  onclickBtn,
 }) => {
+  const handleUpdateClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation(); // Stop event propagation
+    updateBtn(); // Call the updateBtn function
+  };
+
+  const handleDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation(); // Stop event propagation
+    deleteBtn(); // Call the deleteBtn function
+  };
+
   return (
-    <div className={styles.itemCard}>
+    <div className={styles.itemCard} onClick={onclickBtn}>
       <img src={imageUrl} alt={name} className={styles.itemImage} />
       <div className={styles.itemInfo}>
         <h3 className={styles.itemName}>{name}</h3>
@@ -31,10 +43,10 @@ const ItemCard: React.FC<ItemCardProps> = ({
         In Stock {stock}
       </div>
       <div className={styles.buttons}>
-        <button className={styles.seeMore} onClick={updateBtn}>
-          Update
+        <button className={styles.seeMore} onClick={handleUpdateClick}>
+          See More
         </button>
-        <button className={styles.delete} onClick={deleteBtn}>
+        <button className={styles.delete} onClick={handleDeleteClick}>
           Delete
         </button>
       </div>

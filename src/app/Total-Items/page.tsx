@@ -6,13 +6,15 @@ import ItemCard from "@/components/card/itemCard";
 import styles from "@/utils/saas/total-Items.module.scss";
 import Sidebar from "@/components/sideBar/sidbar"; // Import the Sidebar component
 import Swal from "sweetalert2";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import AddProduct from "../AddProduct/page";
 import UpdateProductForm from "@/components/updateProductForm/updateProductForm";
 import { Productts } from "@/utils/model/item";
+import Link from "next/link";
 
 const TotalProducts = () => {
   const router = useRouter();
+
   const [allItems, setAllItems] = useState<Productts[]>([]);
   const [updateItem, setUpdateItem] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState<number | undefined>(
@@ -32,7 +34,7 @@ const TotalProducts = () => {
   }, []);
 
   const updateBtn = async (itemId: number) => {
-    console.log(`Update Btn ${itemId}`);
+    console.log(`See more ${itemId}`);
     setUpdateItem(true);
     setSelectedItemId(itemId);
   };
@@ -78,7 +80,7 @@ const TotalProducts = () => {
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, [updateItem]);
+  });
 
   return (
     <div className={styles.container}>
@@ -86,8 +88,8 @@ const TotalProducts = () => {
       <div className={styles.body}>
         {updateItem && (
           <div className={styles.sidebar} id="sidebar">
-            This is my sidebar for the product list
-            <UpdateProductForm id={selectedItemId || 0} />
+            <Sidebar id={selectedItemId || 0}></Sidebar>
+            {/* <UpdateProductForm id={selectedItemId || 0} /> */}
           </div>
         )}
         {allItems.map((item: Productts) => (
@@ -100,6 +102,9 @@ const TotalProducts = () => {
             stock={item.stock}
             updateBtn={() => updateBtn(item._id || 0)}
             deleteBtn={() => handleDelete(item._id || 0)}
+            onclickBtn={() => {
+              router.push(`/Total-Items/${item._id}`);
+            }}
           />
         ))}
       </div>
