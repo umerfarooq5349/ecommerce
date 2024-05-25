@@ -5,22 +5,12 @@ import { addItem } from "@/app/api/item";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 import Foorm from "../form/form";
-
-interface Product {
-  price: number;
-  description: string;
-  title: string;
-  discountPercentage: 0;
-  stock: 10;
-  brand: string;
-  category: string;
-  thumbnail: string;
-}
+import { Productts } from "@/utils/model/item";
 
 const AddProduct = () => {
   const router = useRouter();
 
-  const [formData, setFormData] = useState<Product>({
+  const [formData, setFormData] = useState<Productts>({
     price: 0,
     description: "",
     title: "",
