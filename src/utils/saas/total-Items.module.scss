@@ -1,24 +1,42 @@
 @import "./theme/theme.scss";
 
 .container {
-  width: inherit;
+  width: 100%;
   height: 100%;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+
   // background-color: $secondary-color;
   margin-top: 10px;
   padding-bottom: 20px;
+
   h1 {
     padding: 20px 0;
   }
+
   .body {
     display: flex;
     flex-wrap: wrap;
-    width: 1000px;
+    width: 100%;
+    max-width: 1000px; // Limit the max width
     justify-content: center;
     gap: 20px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .body {
+      width: 100%;
+      padding: 0 20px; // Add some padding on smaller screens
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    .body {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 }
 
@@ -34,7 +52,23 @@
   top: 0;
   right: 0;
   bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media screen and (max-width: 992px) {
+    width: 60%;
+
+    // max-width: 300px; // Limit the sidebar width on smaller screens
+  }
+
+  @media screen and (max-width: 576px) {
+    width: 60%;
+    background-color: saddlebrown;
+    // max-width: 100%;
+  }
 }
+
 .sidebarclose {
-  display: hidden;
+  display: none; // Corrected from 'hidden' to 'none'
 }

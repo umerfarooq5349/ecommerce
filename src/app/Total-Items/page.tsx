@@ -7,10 +7,8 @@ import styles from "@/utils/saas/total-Items.module.scss";
 import Sidebar from "@/components/sideBar/sidbar"; // Import the Sidebar component
 import Swal from "sweetalert2";
 import { usePathname, useRouter } from "next/navigation";
-import AddProduct from "../AddProduct/page";
-import UpdateProductForm from "@/components/updateProductForm/updateProductForm";
+
 import { Productts } from "@/utils/model/item";
-import Link from "next/link";
 
 const TotalProducts = () => {
   const router = useRouter();

@@ -1,26 +1,17 @@
 "use client";
 import { useState } from "react";
 import styles from "@/utils/saas/FormComponent.module.scss";
-import { addItem } from "@/app/api/item";
+import { addItem, uploadProductImage } from "@/app/api/item";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 import Foorm from "../form/form";
-
-interface Product {
-  price: number;
-  description: string;
-  title: string;
-  discountPercentage: 0;
-  stock: 10;
-  brand: string;
-  category: string;
-  thumbnail: string;
-}
+import { Productts } from "@/utils/model/item";
+import { File } from "buffer";
 
 const AddProduct = () => {
   const router = useRouter();
 
-  const [formData, setFormData] = useState<Product>({
+  const [formData, setFormData] = useState<Productts>({
     price: 0,
     description: "",
     title: "",
@@ -39,6 +30,24 @@ const AddProduct = () => {
       ...prevState,
       [name]: value,
     }));
+  };
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const image = e.target.files?.[0];
+    if (image) {
+      try {
+        const response = await uploadProductImage(image);
+        setFormData((prevState: any) => ({
+          ...prevState,
+          thumbnail: response.url, // Assuming your API returns the image URL as `url`
+        }));
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
+      }
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -77,6 +86,7 @@ const AddProduct = () => {
       stock={formData.stock}
       thumbnail={formData.thumbnail}
       title={formData.title}
+      handleImageUpload={handleImageUpload}
       handleChange={handleChange}
       handleSubmit={handleSubmit}
     ></Foorm>
