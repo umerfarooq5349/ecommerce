@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import Foorm from "../form/form";
-import { getItem, updateItem } from "@/app/api/item"; // Import getItem function
+import { getItem, updateItem, uploadProductImage } from "@/app/api/item"; // Import getItem function
 import { Productts } from "@/utils/model/item";
 
 interface UpdateProductFormProps {
@@ -44,6 +44,24 @@ const UpdateProductForm: React.FC<UpdateProductFormProps> = ({ id }) => {
       [name]: value,
     }));
   };
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const image = e.target.files?.[0];
+    if (image) {
+      try {
+        const response = await uploadProductImage(image);
+        setFormData((prevState: any) => ({
+          ...prevState,
+          thumbnail: response.url, // Assuming your API returns the image URL as `url`
+        }));
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
+      }
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
@@ -70,6 +88,7 @@ const UpdateProductForm: React.FC<UpdateProductFormProps> = ({ id }) => {
     }
   };
 
+  console.log(`thumbnail image url: ${formData.thumbnail}`);
   return (
     <div>
       <Foorm
@@ -80,8 +99,9 @@ const UpdateProductForm: React.FC<UpdateProductFormProps> = ({ id }) => {
         price={formData.price}
         stock={formData.stock}
         thumbnail={formData.thumbnail}
-        handleChange={handleChange}
         title={formData.title}
+        handleChange={handleChange}
+        handleImageUpload={handleImageUpload}
         handleSubmit={handleSubmit}
       ></Foorm>
     </div>

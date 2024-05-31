@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
 import styles from "@/utils/saas/home.module.scss";
 import Navbar from "@/components/navbar/navbar";

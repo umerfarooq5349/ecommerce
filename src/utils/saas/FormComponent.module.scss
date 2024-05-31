@@ -3,37 +3,40 @@
 .addProductForm {
   display: flex;
   flex-direction: column;
+  padding: 20px;
+  justify-content: center;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: auto;
 
-  .group {
-    margin: 20px;
+  .row {
     display: flex;
-    // background-color: #007bff;
+    flex-wrap: wrap;
     gap: 10px;
-    justify-content: space-around;
-    input {
-      padding: 12px;
-      margin: 0 8px;
-    }
+    margin-bottom: 20px;
   }
 
   .group_label {
     font-weight: bold;
     margin-bottom: 8px;
-    justify-content: start;
-    text-align: start;
-    align-items: start;
+    color: #ffffff;
   }
 
-  .input_feild {
-    width: 100%;
+  .input_field {
+    flex: 1;
     padding: 12px;
-    border: none;
+    border: 1px solid #2b2b2b;
     outline: none;
+    padding-left: 20px;
     border-radius: 4px;
-    margin-top: 4px;
+    background-color: #2b2b2b;
+    color: #ffffff;
     &:focus {
       border-color: #ffc107;
+      outline: none;
+      box-shadow: none; /* Remove the default blue glow */
     }
+
     &:disabled {
       background-color: #f2f2f2;
       cursor: not-allowed;
@@ -42,13 +45,15 @@
 
   .textarea_field {
     width: 100%;
-    padding: 8px;
-    border: none;
+    padding: 12px;
+    border: 1px solid #2b2b2b;
     border-radius: 4px;
-    margin-top: 4px;
+    background-color: #2b2b2b;
+    color: #ffffff;
     resize: none;
+
     &:focus {
-      border-color: #ffc107; /* Change border color on focus */
+      border-color: #ffc107;
     }
   }
 
@@ -56,15 +61,22 @@
     background-color: #ffc107;
     color: #fff;
     border: none;
-    margin-top: 20px;
     border-radius: 4px;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 20px;
 
     &:hover {
       background-color: #b88a02;
     }
+  }
+
+  .thumbnail_preview {
+    margin-top: 10px;
+    max-width: 50%;
+    height: auto;
+    border-radius: 4px;
   }
 }

@@ -2,7 +2,7 @@ const NotFound = () => {
   return (
     <div>
       <h3>Not Found</h3>
-      <p>Page not this is custom page found</p>
+      <p>Page not found</p>
     </div>
   );
 };

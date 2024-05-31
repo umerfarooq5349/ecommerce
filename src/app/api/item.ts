@@ -69,3 +69,18 @@ export const updateItem = async (id: number, updatedData: Productts) => {
   console.log(`Success: ${response}`);
   return response.json();
 };
+
+export const uploadProductImage = async (imageFile: File) => {
+  const formData = new FormData();
+  formData.set("thumbnail", imageFile);
+
+  const response = await fetch("http://localhost:8080/api/upload", {
+    method: "POST",
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  return response.json();
+};
