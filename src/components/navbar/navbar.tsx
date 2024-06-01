@@ -12,7 +12,6 @@ const Navbar = () => {
           <li>
             <Link href={"/AddProduct"}>Add Product </Link>
           </li>
-          <li>About</li>
         </ul>
       </div>
     </div>

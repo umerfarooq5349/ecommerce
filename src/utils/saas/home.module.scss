@@ -5,11 +5,11 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  // padding: $large-spacing;
-  min-height: 85vh;
+  margin: 70px;
+  font-family: $font-family;
+  min-height: 100vh;
   width: 80%;
   margin: auto;
-
   .description {
     display: inherit;
     justify-content: inherit;
@@ -18,7 +18,7 @@
     max-width: var(--max-width);
     width: 100%;
     z-index: 2;
-    font-family: $body-font-family;
+    font-family: $font-family;
 
     a {
       display: flex;
@@ -39,7 +39,7 @@
 
   .code {
     font-weight: 700;
-    font-family: $body-font-family;
+    font-family: $font-family;
   }
 
   .grid {

@@ -6,6 +6,10 @@ import styles from "@/utils/saas/home.module.scss";
 import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
 
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css"; // Import the CSS
+config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's being imported above
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

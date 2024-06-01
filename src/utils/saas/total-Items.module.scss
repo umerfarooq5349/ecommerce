@@ -1,14 +1,11 @@
 @import "./theme/theme.scss";
 
 .container {
-  width: 100%;
   height: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: start;
   align-items: center;
   flex-direction: column;
-
-  // background-color: $secondary-color;
   margin-top: 10px;
   padding-bottom: 20px;
 
@@ -20,31 +17,20 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    max-width: 1000px; // Limit the max width
+    max-width: 1000px; // Limit the width to 1000px
     justify-content: center;
     gap: 20px;
-  }
+    padding: 0 20px; // Add padding to ensure spacing on smaller screens
 
-  @media screen and (max-width: 768px) {
-    .body {
-      width: 100%;
-      padding: 0 20px; // Add some padding on smaller screens
-    }
-  }
-
-  @media screen and (max-width: 576px) {
-    .body {
-      flex-direction: column;
-      align-items: center;
+    @media screen and (max-width: 768px) {
+      width: 100%; // Ensure the width adjusts to smaller screens
+      gap: 10px; // Reduce gap for smaller screens
     }
   }
 }
-
-/* Sidebar.module.scss */
-
 .sidebar {
   color: #fff;
-  width: 500px;
+  width: 300px; // Adjusted width for responsiveness
   z-index: 1;
   position: fixed;
   text-align: center;
@@ -52,23 +38,17 @@
   top: 0;
   right: 0;
   bottom: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  background-color: #333; // Ensure background color for better visibility
 
-  @media screen and (max-width: 992px) {
-    width: 60%;
-
-    // max-width: 300px; // Limit the sidebar width on smaller screens
-  }
-
-  @media screen and (max-width: 576px) {
-    width: 60%;
-    background-color: saddlebrown;
-    // max-width: 100%;
+  @media screen and (max-width: 768px) {
+    width: 50%; // Full width for smaller screens
+    height: auto; // Adjust height for smaller screens
+    bottom: auto; // Remove bottom fixed position
+    top: 0; // Fixed to the top
+    left: 0; // Full width
   }
 }
 
 .sidebarclose {
-  display: none; // Corrected from 'hidden' to 'none'
+  display: none; // Fix the display property
 }

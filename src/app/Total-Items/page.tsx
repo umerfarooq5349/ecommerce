@@ -1,12 +1,11 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import { deleteItem, getAllItems } from "../api/item";
 import ItemCard from "@/components/card/itemCard";
 import styles from "@/utils/saas/total-Items.module.scss";
 import Sidebar from "@/components/sideBar/sidbar"; // Import the Sidebar component
 import Swal from "sweetalert2";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { Productts } from "@/utils/model/item";
 
@@ -87,24 +86,27 @@ const TotalProducts = () => {
         {updateItem && (
           <div className={styles.sidebar} id="sidebar">
             <Sidebar id={selectedItemId || 0}></Sidebar>
-            {/* <UpdateProductForm id={selectedItemId || 0} /> */}
           </div>
         )}
-        {allItems.map((item: Productts) => (
-          <ItemCard
-            imageUrl={item.thumbnail}
-            name={item.title}
-            price={item.price}
-            brand={item.brand}
-            key={item._id}
-            stock={item.stock}
-            updateBtn={() => updateBtn(item._id || 0)}
-            deleteBtn={() => handleDelete(item._id || 0)}
-            onclickBtn={() => {
-              router.push(`/Total-Items/${item._id}`);
-            }}
-          />
-        ))}
+        {allItems.length === 0 ? (
+          <p>No items available.</p>
+        ) : (
+          allItems.map((item: Productts) => (
+            <ItemCard
+              imageUrl={item.thumbnail}
+              name={item.title}
+              price={item.price}
+              brand={item.brand}
+              key={item._id}
+              stock={item.stock}
+              updateBtn={() => updateBtn(item._id || 0)}
+              deleteBtn={() => handleDelete(item._id || 0)}
+              onclickBtn={() => {
+                router.push(`/Total-Items/${item._id}`);
+              }}
+            />
+          ))
+        )}
       </div>
     </div>
   );
