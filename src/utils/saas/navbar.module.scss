@@ -1,10 +1,11 @@
 @import "./theme/theme.scss";
 .container {
   background-color: $bg-color;
-
+  color: $title-color;
   display: flex;
-  width: inherit;
+  width: 100%;
   flex-direction: row;
+  font-weight: bold;
   justify-content: space-between;
   padding: 20px 10px;
   .body {

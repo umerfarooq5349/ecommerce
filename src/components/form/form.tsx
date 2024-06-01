@@ -112,30 +112,27 @@ const Foorm = (formData: FormData) => {
         />
         <span>Category</span>
       </label>
-      <label>
-        {!selectedImage && !formData.thumbnail && (
-          <>
-            <input
-              type="file"
-              name="thumbnail"
-              onChange={handleImageUpload}
-              required
-              className={styles.input}
-            />
-            <span>Thumbnail URL</span>
-          </>
-        )}
-        {(selectedImage || formData.thumbnail) && (
-          <div className={styles.thumbnail_preview}>
-            <Image
-              src={selectedImage || formData.thumbnail}
-              alt="Selected Thumbnail"
-              width={350}
-              height={200}
-            />
-          </div>
-        )}
-      </label>
+      <div className={styles.flexCenter}>
+        <label className={styles.centered}>
+          <input
+            type="file"
+            name="thumbnail"
+            onChange={handleImageUpload}
+            className={styles.input}
+          />
+          <span>Upload Thumbnail</span>
+        </label>
+      </div>
+      {(selectedImage || formData.thumbnail) && (
+        <div className={styles.thumbnail_preview}>
+          <Image
+            src={selectedImage || formData.thumbnail}
+            alt="Selected Thumbnail"
+            width={350}
+            height={200}
+          />
+        </div>
+      )}
       <label>
         <textarea
           name="description"
