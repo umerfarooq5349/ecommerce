@@ -1,6 +1,7 @@
 import styles from "@/utils/saas/itemCard.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDeleteLeft, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+
 interface ItemCardProps {
   name: string;
   price: number;
