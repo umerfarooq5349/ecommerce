@@ -15,6 +15,7 @@
 
   label {
     position: relative;
+    flex: 1;
 
     .input {
       background-color: $input-bg-color;
@@ -58,6 +59,7 @@
     border-radius: 10px;
     border: 2px solid $input-border-color;
     object-fit: cover;
+    align-self: center; // Center the thumbnail preview
   }
 }
 
@@ -106,6 +108,19 @@
 
   label {
     flex: 1;
+  }
+}
+
+.flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  .centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 
