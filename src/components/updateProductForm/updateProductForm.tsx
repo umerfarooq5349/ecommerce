@@ -103,6 +103,7 @@ const UpdateProductForm: React.FC<UpdateProductFormProps> = ({ id }) => {
         handleChange={handleChange}
         handleImageUpload={handleImageUpload}
         handleSubmit={handleSubmit}
+        heading="Update"
       ></Foorm>
     </div>
   );

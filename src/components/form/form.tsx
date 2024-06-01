@@ -1,5 +1,6 @@
 import styles from "@/utils/saas/FormComponent.module.scss";
-import React, { useState, ChangeEventHandler, FormEventHandler } from "react";
+import Image from "next/image";
+import { useState, ChangeEventHandler, FormEventHandler } from "react";
 
 interface FormData {
   price: number;
@@ -10,9 +11,10 @@ interface FormData {
   brand: string;
   category: string;
   thumbnail: string;
-  handleImageUpload: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   handleSubmit: FormEventHandler<HTMLFormElement>;
   handleChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  handleImageUpload: ChangeEventHandler<HTMLInputElement>;
+  heading: string;
 }
 
 const Foorm = (formData: FormData) => {
@@ -26,126 +28,130 @@ const Foorm = (formData: FormData) => {
         setSelectedImage(reader.result as string);
       };
       reader.readAsDataURL(file);
-      formData.handleImageUpload(event); // Call the original handler
     }
+    formData.handleImageUpload(event); // Call the original handler
   };
-  console.log(`Thumbnail image url from foorm: ${formData.thumbnail}`);
+
   return (
-    <div className="container">
-      <form className={styles.addProductForm} onSubmit={formData.handleSubmit}>
-        <div className="row mb-3">
-          <div className="col-md-4">
-            <label className={`${styles.group_label}`}>Title</label>
-            <input
-              type="text"
-              name="title"
-              placeholder="Product Title"
-              value={formData.title}
-              onChange={formData.handleChange}
-              required
-              className={`form-control ${styles.input_field}`}
-            />
-          </div>
-          <div className="col-md-4">
-            <label className={`${styles.group_label}`}>Price</label>
-            <input
-              type="number"
-              name="price"
-              placeholder="Price"
-              value={formData.price}
-              onChange={formData.handleChange}
-              required
-              className={`form-control ${styles.input_field}`}
-            />
-          </div>
-          <div className="col-md-4">
-            <label className={`${styles.group_label}`}>Discount</label>
-            <input
-              type="number"
-              name="discountPercentage"
-              placeholder="Discount Percentage"
-              value={formData.discountPercentage}
-              onChange={formData.handleChange}
-              required
-              className={`form-control ${styles.input_field}`}
-            />
-          </div>
-        </div>
-        <div className="row mb-3">
-          <div className="col-md-4">
-            <label className={`${styles.group_label}`}>Stock</label>
-            <input
-              type="number"
-              name="stock"
-              placeholder="Stock"
-              value={formData.stock}
-              onChange={formData.handleChange}
-              required
-              className={`form-control ${styles.input_field}`}
-            />
-          </div>
-          <div className="col-md-4">
-            <label className={`${styles.group_label}`}>Brand</label>
-            <input
-              type="text"
-              name="brand"
-              placeholder="Brand"
-              value={formData.brand}
-              onChange={formData.handleChange}
-              required
-              className={`form-control ${styles.input_field}`}
-            />
-          </div>
-          <div className="col-md-4">
-            <label className={`${styles.group_label}`}>Category</label>
-            <input
-              type="text"
-              name="category"
-              placeholder="Category"
-              value={formData.category}
-              onChange={formData.handleChange}
-              required
-              className={`form-control ${styles.input_field}`}
-            />
-          </div>
-        </div>
-        <div className="mb-3">
-          <label className={`${styles.group_label}`}>Thumbnail URL</label>
+    <form className={styles.form} onSubmit={formData.handleSubmit}>
+      <p className={styles.title}>{formData.heading} Product</p>
+      <p className={styles.message}>Fill in the product details below.</p>
+      <div className={styles.flex}>
+        <label>
           <input
-            type="file"
-            name="thumbnail"
+            type="text"
+            name="title"
+            placeholder=""
+            value={formData.title}
+            onChange={formData.handleChange}
             required
-            onChange={handleImageUpload}
-            className={`form-control ${styles.input_field}`}
+            className={styles.input}
           />
-          {(selectedImage || formData.thumbnail) && (
-            <img
+          <span>Title</span>
+        </label>
+        <label>
+          <input
+            type="number"
+            name="price"
+            placeholder=""
+            value={formData.price}
+            onChange={formData.handleChange}
+            required
+            className={styles.input}
+          />
+          <span>Price</span>
+        </label>
+      </div>
+      <div className={styles.flex}>
+        <label>
+          <input
+            type="number"
+            name="discountPercentage"
+            placeholder=""
+            value={formData.discountPercentage}
+            onChange={formData.handleChange}
+            required
+            className={styles.input}
+          />
+          <span>Discount Percentage</span>
+        </label>
+        <label>
+          <input
+            type="number"
+            name="stock"
+            placeholder=""
+            value={formData.stock}
+            onChange={formData.handleChange}
+            required
+            className={styles.input}
+          />
+          <span>Stock</span>
+        </label>
+      </div>
+      <label>
+        <input
+          type="text"
+          name="brand"
+          placeholder=""
+          value={formData.brand}
+          onChange={formData.handleChange}
+          required
+          className={styles.input}
+        />
+        <span>Brand</span>
+      </label>
+      <label>
+        <input
+          type="text"
+          name="category"
+          placeholder=""
+          value={formData.category}
+          onChange={formData.handleChange}
+          required
+          className={styles.input}
+        />
+        <span>Category</span>
+      </label>
+      <label>
+        {!selectedImage && !formData.thumbnail && (
+          <>
+            <input
+              type="file"
+              name="thumbnail"
+              onChange={handleImageUpload}
+              required
+              className={styles.input}
+            />
+            <span>Thumbnail URL</span>
+          </>
+        )}
+        {(selectedImage || formData.thumbnail) && (
+          <div className={styles.thumbnail_preview}>
+            <Image
               src={selectedImage || formData.thumbnail}
               alt="Selected Thumbnail"
-              className={styles.thumbnail_preview}
+              width={350}
+              height={200}
             />
-          )}
-        </div>
-        <div className="mb-3">
-          <label className={`${styles.group_label}`}>Description</label>
-          <textarea
-            name="description"
-            placeholder="Description"
-            value={formData.description}
-            required
-            onChange={formData.handleChange}
-            rows={5}
-            className={`form-control ${styles.input_field}`}
-          />
-        </div>
-        <button
-          type="submit"
-          className={`${styles.submit_button} btn btn-primary`}
-        >
-          Add Product
-        </button>
-      </form>
-    </div>
+          </div>
+        )}
+      </label>
+      <label>
+        <textarea
+          name="description"
+          placeholder=""
+          value={formData.description}
+          onChange={formData.handleChange}
+          rows={5}
+          required
+          className={styles.input}
+        />
+        <span>Description</span>
+      </label>
+      <button type="submit" className={styles.submit}>
+        {formData.heading} Product
+      </button>
+    </form>
   );
 };
 

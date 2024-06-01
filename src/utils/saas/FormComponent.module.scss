@@ -1,9 +1,11 @@
 @import "./theme/theme.scss";
+
 .form {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  // max-width: 350px;
+  width: 600px; // Adjust max-width as needed
+  margin: 0 auto;
   padding: 20px;
   border-radius: 20px;
   position: relative;
@@ -13,6 +15,7 @@
 
   label {
     position: relative;
+
     .input {
       background-color: $input-bg-color;
       color: #fff;
@@ -47,6 +50,15 @@
       transition: 0.3s ease;
     }
   }
+
+  .thumbnail_preview {
+    margin-top: 10px;
+    width: 100%;
+    max-width: 350px;
+    border-radius: 10px;
+    border: 2px solid $input-border-color;
+    object-fit: cover;
+  }
 }
 
 .title {
@@ -79,24 +91,7 @@
     width: 18px;
     height: 18px;
     animation: pulse 1s linear infinite;
-  }
-}
-
-.message,
-.signin {
-  font-size: 14.5px;
-  color: $text-color;
-
-  a {
-    color: $title-color;
-
-    &:hover {
-      text-decoration: underline $text-hover-color;
-    }
-  }
-
-  &.signin {
-    text-align: center;
+    -webkit-animation: pulse 1s linear infinite;
   }
 }
 

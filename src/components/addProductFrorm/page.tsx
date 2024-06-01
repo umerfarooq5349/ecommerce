@@ -1,12 +1,11 @@
 "use client";
 import { useState } from "react";
-import styles from "@/utils/saas/FormComponent.module.scss";
+
 import { addItem, uploadProductImage } from "@/app/api/item";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 import Foorm from "../form/form";
 import { Productts } from "@/utils/model/item";
-import { File } from "buffer";
 
 const AddProduct = () => {
   const router = useRouter();
@@ -89,6 +88,7 @@ const AddProduct = () => {
       handleImageUpload={handleImageUpload}
       handleChange={handleChange}
       handleSubmit={handleSubmit}
+      heading="Add"
     ></Foorm>
   );
 };
