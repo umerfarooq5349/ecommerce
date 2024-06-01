@@ -19,6 +19,7 @@ interface FormData {
 
 const Foorm = (formData: FormData) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   const handleImageUpload: ChangeEventHandler<HTMLInputElement> = (event) => {
     const file = event.target.files?.[0];
@@ -26,10 +27,19 @@ const Foorm = (formData: FormData) => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setSelectedImage(reader.result as string);
+        setImageUrl(null); // Clear image URL if a file is selected
       };
       reader.readAsDataURL(file);
     }
     formData.handleImageUpload(event); // Call the original handler
+  };
+
+  const handleImageUrlChange: ChangeEventHandler<HTMLInputElement> = (
+    event
+  ) => {
+    const url = event.target.value;
+    setImageUrl(url);
+    setSelectedImage(null); // Clear selected image if URL is used
   };
 
   return (
@@ -112,30 +122,45 @@ const Foorm = (formData: FormData) => {
         />
         <span>Category</span>
       </label>
-      <label>
-        {!selectedImage && !formData.thumbnail && (
-          <>
-            <input
-              type="file"
-              name="thumbnail"
-              onChange={handleImageUpload}
-              required
-              className={styles.input}
-            />
-            <span>Thumbnail URL</span>
-          </>
-        )}
-        {(selectedImage || formData.thumbnail) && (
-          <div className={styles.thumbnail_preview}>
-            <Image
-              src={selectedImage || formData.thumbnail}
-              alt="Selected Thumbnail"
-              width={350}
-              height={200}
-            />
-          </div>
-        )}
-      </label>
+      <div className={styles.flex}>
+        <label>
+          {!selectedImage && !imageUrl && (
+            <>
+              <input
+                type="file"
+                name="thumbnail"
+                onChange={handleImageUpload}
+                className={styles.input}
+              />
+              <span>Upload Thumbnail</span>
+            </>
+          )}
+        </label>
+        <label>
+          {!selectedImage && !imageUrl && (
+            <>
+              <input
+                type="text"
+                name="imageUrl"
+                placeholder="Enter Image URL"
+                onChange={handleImageUrlChange}
+                className={styles.input}
+              />
+              <span>Enter Thumbnail URL</span>
+            </>
+          )}
+        </label>
+      </div>
+      {(selectedImage || imageUrl) && (
+        <div className={styles.thumbnail_preview}>
+          <Image
+            src={selectedImage! || imageUrl!}
+            alt="Selected Thumbnail"
+            width={350}
+            height={200}
+          />
+        </div>
+      )}
       <label>
         <textarea
           name="description"
