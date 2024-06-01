@@ -1,6 +1,7 @@
 @import "./theme/theme.scss";
 .container {
-  background-color: $dark-color;
+  background-color: $bg-color;
+
   display: flex;
   width: inherit;
   flex-direction: row;

@@ -1,47 +1,58 @@
-@import "./theme/theme.scss";
-
 .container {
+  padding: 20px;
   color: rgb(255, 255, 255);
-  background-color: rgb(31, 82, 99);
-  height: 100%;
-  width: 100%;
+  background-color: rgb(79, 107, 95);
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
-  padding: 10px 20px; // Adjusted padding to reduce top and bottom spacing
+
+  @media screen and (max-width: 768px) {
+    height: auto;
+    padding: 10px;
+    border-radius: 0;
+  }
 
   .product {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 20px;
 
     .title {
-      margin: 20px 0; // Adjusted margin to reduce spacing at the top
-      text-align: center;
+      margin: 0;
     }
   }
 
   .thumbnail {
-    width: 100%;
-    max-width: 400px;
-    height: 250px;
+    width: 100%; // Adjust width for responsiveness
+    max-width: 400px; // Limit maximum width
+    height: auto; // Maintain aspect ratio
     object-fit: cover;
     border-radius: 20px;
+
+    @media screen and (max-width: 768px) {
+      max-width: 100%; // Ensure full width for smaller screens
+      border-radius: 10px; // Adjust border radius
+    }
   }
 
   .details {
-    width: 100%;
-    max-width: 800px;
+    width: 100%; // Ensure details section is responsive
 
     .group {
       display: grid;
-      grid-template-columns: repeat(2, minmax(auto, 1fr));
+      grid-template-columns: 1fr 1fr; // Use fractional units for flexibility
       gap: 20px;
+
+      @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr; // Single column for smaller screens
+        gap: 10px; // Adjust gap for smaller screens
+      }
 
       .subGroup {
         border: 1px solid #ccc;
@@ -51,6 +62,11 @@
         flex-direction: row;
         justify-content: space-between;
         border-radius: 8px;
+
+        @media screen and (max-width: 768px) {
+          flex-direction: column; // Stack content vertically for smaller screens
+          align-items: flex-start; // Align items to the start
+        }
 
         .head {
           font-weight: bold;
@@ -63,10 +79,11 @@
     }
 
     .description {
-      margin-bottom: 20px; // Adjusted margin to reduce spacing at the bottom
+      margin-bottom: 30px;
 
       .head {
         font-weight: bold;
+        align-items: flex-start;
         text-align: start;
         margin-bottom: 8px;
       }
@@ -79,49 +96,9 @@
 
   .title {
     font-size: 24px;
-    text-align: center;
-    margin-bottom: 20px; // Added margin to provide spacing below the title
-  }
 
-  @media screen and (max-width: 768px) {
-    .thumbnail {
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-    }
-
-    .details {
-      max-width: 100%;
-
-      .group {
-        grid-template-columns: repeat(2, minmax(auto, 1fr));
-        gap: 10;
-      }
-    }
-
-    .title {
-      font-size: 20px;
-    }
-  }
-
-  @media screen and (max-width: 576px) {
-    width: 400px;
-    .thumbnail {
-      width: 100%;
-      max-width: 250px;
-      height: auto;
-    }
-
-    .details {
-      max-width: 100%;
-
-      .group {
-        grid-template-columns: repeat(2, minmax(auto, 1fr));
-      }
-    }
-
-    .title {
-      font-size: 18px;
+    @media screen and (max-width: 768px) {
+      font-size: 20px; // Adjust font size for smaller screens
     }
   }
 }

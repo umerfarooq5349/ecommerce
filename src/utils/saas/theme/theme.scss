@@ -1,18 +1,28 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600&display=swap");
 
 // Colors
+
 $primary-color: #007bff;
 $secondary-color: #6c757d;
-$success-color: #28a745;
-$info-color: #17a2b8;
-$warning-color: #ffc107;
 $danger-color: #dc3545;
 $light-color: #f8f9fa;
 $dark-color: #343a40;
+$bg-color: #1a1a1a74;
+$form-bg-color: #1a1a1a;
+$form-border-color: #333;
+$title-color: #00bfff;
+$input-bg-color: #333;
+$input-border-color: rgba(105, 105, 105, 0.397);
+$input-placeholder-color: rgba(255, 255, 255, 0.5);
+$text-color: rgba(255, 255, 255, 0.7);
+$text-hover-color: royalblue;
+$submit-bg-color: #00bfff;
+$submit-hover-bg-color: #00bfff96;
+
+$animation: 2s ease-in-out infinite;
 
 // Typography
-$body-font-family: "Roboto", sans-serif;
-$heading-font-family: "Montserrat", sans-serif;
+$font-family: "Roboto", sans-serif;
 $base-font-size: 16px;
 $heading-font-size: 24px;
 $line-height: 1.5;
