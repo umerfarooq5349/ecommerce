@@ -1,4 +1,5 @@
 import { Productts } from "@/utils/model/item";
+import { UserModel } from "@/utils/model/user";
 import { Route } from "next";
 import { useRouter } from "next/router";
 
@@ -10,13 +11,15 @@ export const getAllItems = async () => {
   return response.json();
 };
 
-export const addItem = async (item: any) => {
+export const addItem = async (item: Productts) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
 
   let response = await fetch("http://localhost:8080/api/items/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      authorization:
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NWMyMGUyZWRiNTM2OWQ4NDI4OGNiZCIsImlhdCI6MTcxNzMyMDkxNiwiZXhwIjoxNzI1MDk2OTE2fQ.9u_V0D2tVvFNa8bcx3rDRY91WurSKRMLG3awm0uGhqw",
     },
     body: JSON.stringify(item),
   });
