@@ -22,7 +22,7 @@ export default function AddProductLayout({
 
       if (error) {
         // <CustomLoader></CustomLoader>;
-        router.push("/");
+        return router.push("/");
       }
       setLogedin(true);
     };

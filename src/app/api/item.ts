@@ -1,89 +1,91 @@
+import axios, { AxiosError } from "axios";
 import { Productts } from "@/utils/model/item";
 import { UserModel } from "@/utils/model/user";
 import { Route } from "next";
 import { useRouter } from "next/router";
+import { getCookie } from "cookies-next";
+
+const api = axios.create({
+  baseURL: "http://localhost:8080/api",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${getCookie("jwt")}`,
+  },
+  withCredentials: true,
+});
 
 export const getAllItems = async () => {
-  let response = await fetch("http://localhost:8080/api/items/");
-  if (!response.ok) {
-    throw new Error(response.statusText);
+  try {
+    const response = await api.get("/items/");
+    return response.data;
+  } catch (e) {
+    const error = e as AxiosError;
+    throw new Error(error.response?.statusText || error.message);
   }
-  return response.json();
 };
 
 export const addItem = async (item: Productts) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-
-  let response = await fetch("http://localhost:8080/api/items/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NWMyMGUyZWRiNTM2OWQ4NDI4OGNiZCIsImlhdCI6MTcxNzMyMDkxNiwiZXhwIjoxNzI1MDk2OTE2fQ.9u_V0D2tVvFNa8bcx3rDRY91WurSKRMLG3awm0uGhqw",
-    },
-    body: JSON.stringify(item),
-  });
-  if (!response.ok) {
-    throw new Error(response.statusText);
+  try {
+    const response = await api.post("/items/", item);
+    return response.data;
+  } catch (e) {
+    const error = e as AxiosError;
+    throw new Error(
+      error.response?.statusText || error.message || `here is main error`
+    );
   }
-
-  return response.json();
 };
 
 export const deleteItem = async (item: any) => {
-  // Extract the ID from the item object
   const itemId = item;
-  let response = await fetch(`http://localhost:8080/api/items/${itemId}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    // body: JSON.stringify(item),
-  });
-  if (!response.ok) {
-    throw new Error(response.statusText);
+  try {
+    const response = await api.delete(`/items/${itemId}`);
+    return response;
+  } catch (e) {
+    const error = e as AxiosError;
+    throw new Error(error.response?.statusText || error.message);
   }
-  return response;
 };
 
 export const getItem = async (item: any) => {
-  // Extract the ID from the item object
   const itemId = item;
-
-  let response = await fetch(`http://localhost:8080/api/items/${itemId}`);
-
-  if (!response.ok) {
-    throw new Error(response.statusText);
+  try {
+    const response = await api.get(`/items/${itemId}`);
+    return response.data;
+  } catch (e) {
+    const error = e as AxiosError;
+    throw new Error(error.response?.statusText || error.message);
   }
-  return response.json();
 };
 
 export const updateItem = async (id: number, updatedData: Productts) => {
-  let response = await fetch(`http://localhost:8080/api/items/${id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(updatedData),
-  });
-  if (!response.ok) {
-    throw new Error(response.statusText);
+  try {
+    const response = await api.put(`/items/${id}`, updatedData);
+    console.log(`Success: ${response}`);
+    return response.data;
+  } catch (e) {
+    const error = e as AxiosError;
+    throw new Error(error.response?.statusText || error.message);
   }
-  console.log(`Success: ${response}`);
-  return response.json();
 };
 
 export const uploadProductImage = async (imageFile: File) => {
   const formData = new FormData();
   formData.set("thumbnail", imageFile);
 
-  const response = await fetch("http://localhost:8080/api/upload", {
-    method: "POST",
-    body: formData,
-  });
-
-  if (!response.ok) {
-    throw new Error(response.statusText);
+  try {
+    const response = await axios.post(
+      "http://localhost:8080/api/upload",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return response.data;
+  } catch (e) {
+    const error = e as AxiosError;
+    throw new Error(error.response?.statusText || error.message);
   }
-  return response.json();
 };
