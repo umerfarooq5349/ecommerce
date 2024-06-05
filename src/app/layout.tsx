@@ -29,6 +29,7 @@ export default function RootLayout({
       <body className={`${inter.className}`}>
         <div className={styles.main}>
           {/* <AuthContext> */}
+
           <Navbar></Navbar>
           {children}
           <Footer />

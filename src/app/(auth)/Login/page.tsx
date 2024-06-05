@@ -15,10 +15,19 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      await login(email, password);
-      router.push("/");
+      const result = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      });
+
+      if (result?.error) {
+        alert(result.error);
+      } else {
+        router.push("/");
+      }
     } catch (error) {
-      alert(error);
+      alert("An error occurred during sign-in.");
     }
   };
   const handlegoogleLogin = async () => {

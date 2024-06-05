@@ -6,6 +6,8 @@ import Link from "next/link";
 
 const Navbar = async () => {
   const session = await getServerSession(options);
+
+  console.log(`navbar ${session}`);
   return (
     <div className={styles.container}>
       <div className={styles.brand}>
