@@ -28,3 +28,27 @@ export default async function middleware(request: NextRequest) {
 export const config = {
   matcher: ["/api/auth/me"],
 };
+
+// export { default } from "next-auth/middleware";
+
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+//   pages: {
+//     signIn: "/auth/signin",
+//     signOut: "/auth/signout",
+//     error: "/auth/error",
+//     verifyRequest: "/auth/verify-request",
+//   },
+//   providers: [
+//     {
+//       id: "google",
+//       name: "Google",
+//       type: "oauth",
+//       clientId: process.env.GOOGLE_CLIENT_ID,
+//       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+//     },
+//   ],
+//   matcher: ["/AddProduct"],
+// };

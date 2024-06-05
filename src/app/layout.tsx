@@ -9,6 +9,7 @@ import Footer from "@/components/footer/footer";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css"; // Import the CSS
 import AuthContext from "./context/AuthContext";
+import { SessionProvider } from "next-auth/react";
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's being imported above
 
 const inter = Inter({ subsets: ["latin"] });
@@ -27,11 +28,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className}`}>
         <div className={styles.main}>
-          <AuthContext>
-            <Navbar></Navbar>
-            {children}
-            <Footer />
-          </AuthContext>
+          {/* <AuthContext> */}
+          <Navbar></Navbar>
+          {children}
+          <Footer />
+          {/* </AuthContext> */}
         </div>
       </body>
     </html>

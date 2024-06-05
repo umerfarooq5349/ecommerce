@@ -4,14 +4,18 @@ import { UserModel } from "@/utils/model/user";
 import { Route } from "next";
 import { useRouter } from "next/router";
 import { getCookie } from "cookies-next";
+// import { cookies } from "next/headers";
 
+// const cookiesStore = cookies();
+
+console.log(getCookie("jwt"));
 const api = axios.create({
   baseURL: "http://localhost:8080/api",
   headers: {
     "Content-Type": "application/json",
     Authorization: `Bearer ${getCookie("jwt")}`,
   },
-  withCredentials: true,
+  // withCredentials: true,
 });
 
 export const getAllItems = async () => {
