@@ -1,7 +1,8 @@
 import type { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { login } from "@/app/api/auth/route"; // Ensure this path is correct
+import { login } from "@/app/api/auth/route";
+import { UserModel } from "@/utils/model/user"; // Import your UserModel interface
 import { JWT } from "next-auth/jwt";
 
 export const options: NextAuthOptions = {
@@ -11,8 +12,6 @@ export const options: NextAuthOptions = {
       clientSecret: process.env.GOOGLESECRET!,
     }),
     CredentialsProvider({
-      // The name to display on the sign-in form (e.g., "Sign in with...")
-
       credentials: {
         email: {
           label: "Email",
@@ -23,7 +22,6 @@ export const options: NextAuthOptions = {
       },
       authorize: async (credentials) => {
         try {
-          // Perform the login logic
           const user = await login(credentials!.email, credentials!.password);
           if (user) {
             return user;
@@ -47,18 +45,31 @@ export const options: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
-        token.email = user.email;
+        const { id, email, name, role, active, photo } = user as UserModel;
+        token.id = id;
+        token.email = email;
+        token.name = name;
+        token.role = role;
+        token.active = active;
+        token.photo = photo;
       }
       return token;
     },
-    async session({ session, token }) {
-      session.user!.name = token.name;
-      session.user!.email = token.email;
-      //   session.user!.role = token.role;
+    async session({ session, token, user }) {
+      if (token && typeof token.id === "string") {
+        session = {
+          ...session,
+          _id: token.id,
+          session_email: user.email,
+          session_name: token.name!,
+          session_role: token.role as string | null | undefined,
+          // session_active: token.active as boolean | null | undefined,
+        };
+      }
       return session;
     },
   },
+
   cookies: {
     sessionToken: {
       name: `jwt`,
