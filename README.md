@@ -2,32 +2,32 @@
 
 ### Project Description
 
-This project is a full-fledged ecommerce platform built using the MERN stack. It combines various features to create a functional ecommerce website for both clients and admins.
+This project is a full-fledged **ecommerce platform** built using the **MERN stack**. It combines various features to create a functional ecommerce website for both clients and admins.
 
 ### Features
 
 #### Client
-- User Registration and Login 📝
-- Browse and Explore Products by Categories 🗂️
-- Add Products to Cart 🛒
-- Checkout Items from Cart 💳
-- Edit/Update Items in the Cart ✏️
+- **User Registration and Login** 📝
+- **Browse and Explore Products** by Categories 🗂️
+- **Add Products to Cart** 🛒
+- **Checkout Items** from Cart 💳
+- **Edit/Update Items** in the Cart ✏️
 
 #### Admin
-- Admin Login 🔐
-- View Registered Customers and Their Details 📋
-- View Daily Sales 📈
-- View Customer Orders with Details 🛍️
-- Manage Inventory (Create, Update, Delete Products) 🛠️
-- View Remaining Stock after Sales 📦
+- **Admin Login** 🔐
+- View **Registered Customers** and Their Details 📋
+- View **Daily Sales**
+
+ 📈
+- View **Customer Orders** with Details 🛍️
+- **Manage Inventory** (Create, Update, Delete Products) 🛠️
+- View **Remaining Stock** after Sales 📦
 
 ### Project Structure
 
 ```plaintext
 ecommerce/
 ├── public/
-
-
 ├── src/
 │   ├── components/
 │   ├── pages/
@@ -66,11 +66,11 @@ ecommerce/
     npm run dev
     ```
 
-    ![](https://via.placeholder.com/400x200)
+    
 
 2. **Open your browser and navigate to `http://localhost:3000` to see the application in action.**
 
-    ![Application Running](https://via.placeholder.com/400x200)
+    
 
 ### API Endpoints
 
@@ -126,9 +126,7 @@ ecommerce/
 - **Express**: Latest version
 - **SASS**: For styling
 - **TypeScript**: For both Next.js and Node.js
-
+---
 ### Author
 
 Umer Farooq
-
----
