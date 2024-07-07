@@ -16,9 +16,9 @@ This project is a full-fledged **ecommerce platform** built using the **MERN sta
 #### Admin
 - **Admin Login** 🔐
 - View **Registered Customers** and Their Details 📋
-- View **Daily Sales**
+- View **Daily Sales** 📈
 
- 📈
+ 
 - View **Customer Orders** with Details 🛍️
 - **Manage Inventory** (Create, Update, Delete Products) 🛠️
 - View **Remaining Stock** after Sales 📦
