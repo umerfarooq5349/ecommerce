@@ -66,7 +66,7 @@ ecommerce/
     npm run dev
     ```
 
-    (https://via.placeholder.com/400x200)
+    [dev](https://via.placeholder.com/400x200)
 
 2. **Open your browser and navigate to `http://localhost:3000` to see the application in action.**
 
