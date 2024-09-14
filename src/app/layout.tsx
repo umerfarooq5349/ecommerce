@@ -8,6 +8,7 @@ import Footer from "@/components/footer/footer";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css"; // Import the CSS
+import ClientSessionProvider from "@/components/clientSideProvider/ClientSessionProvider"; // Import the new provider component
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's being imported above
 
 const inter = Inter({ subsets: ["latin"] });
@@ -17,17 +18,19 @@ export const metadata: Metadata = {
   description: "Created by Umer Farooq",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface RootLayoutProps {
   children: React.ReactNode;
-}>) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
         <div className={styles.main}>
-          <Navbar></Navbar>
-          {children}
+          <ClientSessionProvider>
+            <Navbar />
+            {children}
+          </ClientSessionProvider>
           <Footer />
         </div>
       </body>
